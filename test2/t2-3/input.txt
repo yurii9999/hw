@@ -1,0 +1,7 @@
+str 1 ; comment 1
+str 2 ; comment 2
+str 3
+
+ddd ; comment pamagine
+end ; j vse
+bez com;ment
