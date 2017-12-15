@@ -6,6 +6,12 @@ using namespace std;
 int main()
 {
     ifstream in("input.txt");
+    if (!in)
+    {
+        in.close();
+        cout << "cant open";
+        return 0;
+    }
 
     bool isComment = false;
     char currentChar = 0;
