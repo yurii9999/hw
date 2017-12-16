@@ -5,8 +5,10 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     stringg.cpp \
-    list.cpp
+    list.cpp \
+    hash.cpp
 
 HEADERS += \
     stringg.h \
-    list.h
+    list.h \
+    hash.h
