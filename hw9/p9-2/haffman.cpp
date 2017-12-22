@@ -2,8 +2,8 @@
 #include <fstream>
 #include "haffamn.h"
 
-int const alphobetSize = 26 * 2 + 3; // a..z A..Z . , _
-int const maxKeyLength = 10;
+int const alphobetSize = 255;
+int const maxKeyLength = 20;
 
 using namespace ::std;
 
@@ -69,37 +69,8 @@ Node *rewriteTableToNodes(int *priorityTable, int amountNonZeros)
     for (int i = 0; i < alphobetSize; i++)
         if (priorityTable[i] != 0)
         {
-            if (i < 26)
-            {
-                symbols[j] = createNode('a' + i, priorityTable[i]);
-                j++;
-            }
-            else
-            {
-                if (i >= 26 && i < 52)
-                {
-                    symbols[j] = createNode('A' + i - 26, priorityTable[i]);
-                    j++;
-                }
-                else
-                    switch (i)
-                    {
-                    case 52:
-                        symbols[j] = createNode('.', priorityTable[i]);
-                        j++;
-                        break;
-                    case 53:
-                        symbols[j] = createNode(',', priorityTable[i]);
-                        j++;
-                        break;
-                    case 54:
-                        symbols[j] = createNode(' ', priorityTable[i]);
-                        j++;
-                        break;
-                    default:
-                        break;
-                    }
-            }
+            symbols[j] = createNode((char) i, priorityTable[i]);
+            j++;
         }
 
     return symbols;
@@ -117,29 +88,7 @@ int *getPriorityTable(char *fileName)
     while (in.peek() != EOF)
     {
         in.get(currentChar);
-
-        if ('a' <= currentChar && currentChar <= 'z')
-            priorityTable[currentChar - 'a']++;
-        else
-        {
-            if ('A' <= currentChar && currentChar <= 'Z')
-                priorityTable[26 + currentChar - 'A']++;
-            else
-                switch (currentChar)
-                {
-                case '.':
-                    priorityTable[52]++;
-                    break;
-                case ',':
-                    priorityTable[52 + 1]++;
-                    break;
-                case ' ':
-                    priorityTable[52 + 2]++;
-                    break;
-                default:
-                    break;
-                }
-        }
+        priorityTable[(int)currentChar]++;
     }
 
     in.close();
