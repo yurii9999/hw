@@ -2,8 +2,7 @@
 #include <iostream>
 #include "haffman.h"
 
-int const alphobetSize = 26 * 2 + 3; // a..z A..Z . , _
-int const maxKeyLength = 10;
+int const maxKeyLength = 20;
 
 using namespace ::std;
 

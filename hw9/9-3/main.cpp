@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    decodeText("output.txt", "input.txt", "keys.txt");
+    decodeText("input.txt", "output.txt", "keys.txt");
     cout << "done";
     return 0;
 }
