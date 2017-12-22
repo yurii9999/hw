@@ -35,7 +35,8 @@ Graph *readGraph(char *fileName)
     int b = 0;
     for (int i = 0; i < amountEdge; i++)
     {
-        in >> a >> b >> graph->length[a][b];
+        in >> a >> b;
+        in >> graph->length[a][b];
         graph->length[b][a] = graph->length[a][b];
     }
 
