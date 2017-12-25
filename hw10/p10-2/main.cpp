@@ -1,7 +1,7 @@
 #include <iostream>
 #include "stack.h"
 
-int const maxLength = 10000;
+int const maxLength = 100000;
 int const maxLength2 = 1000;
 
 int const d = 13;
@@ -65,28 +65,29 @@ int main()
 {
     char string[maxLength] = {0};
     cout << "\nEnter string: ";
-
     int length = 0;
+    char c = 0;
 
-    cin.get(string[length]);
-    while (string[length] != '\n')
+    cin.get(c);
+    while (c != '\n')
     {
+        string[length] = c;
         length++;
-        cin.get(string[length]);
+        cin.get(c);
     }
 
     cout << "Enter substring: ";
-
+    char substring[maxLength2] = {0};
     int secondLength = 0;
 
-    char substring[maxLength2] = {0};
-    cin.get(substring[length]);
-
-    while (substring[secondLength] != '\n')
+    cin.get(c);
+    while (c != '\n')
     {
+        substring[secondLength] = c;
         secondLength++;
-        cin.get(substring[secondLength]);
+        cin.get(c);
     }
+
 
     int extraQ = ab(q, secondLength) % d;
 
