@@ -24,8 +24,9 @@ int main()
 //    7 - digits after E
 //    -1 - fail
 //    good : 2, 4, 7
-    int status = 0;
+    enum {start, firstSign, firstDigits, dot, digitsAfterDot, E, signAfterE, digitsAfterE, fail} status = start;
 
+    cout << "\nEnter number: ";
     char c = 0;
     cin.get(c);
 
@@ -33,72 +34,74 @@ int main()
     {
         switch (status)
         {
-        case 0:
+        case start:
             if (isSign(c))
-                status = 1;
+                status = firstSign;
             else
                 if(isDigit(c))
-                    status = 2;
+                    status = firstDigits;
                 else
-                    status = -1;
+                    status = fail;
             break;
-        case 1:
+        case firstSign:
             if (isDigit(c))
-                status = 2;
+                status = firstDigits;
             else
-                status = -1;
+                status = fail;
             break;
-        case 2:
+        case firstDigits:
             if (isDigit(c))
-                status = 2;
+                status = firstDigits;
             else
                 if (c == '.')
-                    status = 3;
+                    status = dot;
                 else
-                    status = -1;
+                    if (c == 'E')
+                        status = E;
+                    else
+                        status = fail;
             break;
-        case 3:
+        case dot:
             if (isDigit(c))
-                status = 4;
+                status = digitsAfterDot;
             else
-                status = -1;
+                status = fail;
             break;
-        case 4:
+        case digitsAfterDot:
             if (isDigit(c))
-                status = 4;
+                status = digitsAfterDot;
             else
                 if (c == 'E')
-                    status = 5;
+                    status = E;
                 else
-                    status = -1;
+                    status = fail;
             break;
-        case 5:
+        case E:
             if (isSign(c))
-                status = 6;
+                status = signAfterE;
             else
                 if (isDigit(c))
-                    status = 7;
+                    status = digitsAfterE;
                 else
-                    status = -1;
+                    status = fail;
             break;
-        case 6:
+        case signAfterE:
             if (isDigit(c))
-                status = 7;
+                status = digitsAfterE;
             else
-                status = -1;
+                status = fail;
             break;
         case 7:
             if (isDigit(c))
-                status = 7;
+                status = digitsAfterE;
             else
-                status = -1;
+                status = fail;
             break;
         }
-
         cin.get(c);
     }
 
-    if (status == 7 || status == 2 || status == 4)
+    if (status == digitsAfterE || status == firstDigits || status == digitsAfterDot)
         cout << "double";
     else
         cout << "not double";
