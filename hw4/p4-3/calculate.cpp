@@ -15,7 +15,6 @@ char *convert(char *expression, int length)
 {
     Stack *signs = createStack();
     char *newExpression = new char[length];
-
     for (int i = 0; i < length; i++)
         newExpression[i] = 0;
 
@@ -40,7 +39,7 @@ char *convert(char *expression, int length)
         }
         if (expression[i] == '+' || expression[i] == '-')
         {
-            while (peek(signs) == '+' || peek(signs) == '-' || peek(signs) == '+' || peek(signs) == '-')
+            while (peek(signs) == '+' || peek(signs) == '-')
             {
                 newExpression[newLength] = pop(signs);
                 newLength ++;
@@ -76,6 +75,8 @@ char *convert(char *expression, int length)
 char *inputExpression(int length)
 {
     char *expression = new char[length];
+    for (int i = 0; i < length; i++)
+        expression[i] = 0;
     cin >> expression;
 
     return expression;
