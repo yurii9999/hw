@@ -44,4 +44,5 @@ bool isEmpty(Stack *stack)
 void deleteStack(Stack *&stack)
 {
     deleteList(stack->list);
+    delete stack;
 }
