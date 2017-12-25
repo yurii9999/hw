@@ -18,7 +18,7 @@ void printValue(short int value)
 
 }
 
-bool threeOnesAndMore(short int a, short int b, short int c, short int bit)
+bool twoOnesAndMore(short int a, short int b, short int c, short int bit)
 {
     if ((c & bit) && (b & bit))
         return true;
@@ -45,7 +45,7 @@ short int calculateSum(int a, int b)
         }
         else
         {
-            if (threeOnesAndMore(extra, a, b, bit))
+            if (twoOnesAndMore(extra, a, b, bit))
             {
                     extra = bit << 1;
             }
