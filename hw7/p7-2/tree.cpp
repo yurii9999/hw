@@ -272,4 +272,5 @@ void deleteNode(Node *&node)
 void deleteTree(Tree *&tree)
 {
     deleteNode(tree->root);
+    delete tree;
 }
