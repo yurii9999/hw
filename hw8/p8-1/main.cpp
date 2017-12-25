@@ -24,7 +24,6 @@ int main()
     for (int i = 0; i <= 3; i++)
         solversId[i] = i;
 
-
     for (int i = 4; i < amountPeople; i++)
     {
         cout << "Enter student's id and solver's id (0 if he hasnt): ";
