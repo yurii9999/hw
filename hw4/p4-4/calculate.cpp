@@ -14,6 +14,9 @@ int getMaxLength()
 char *inputExpression(int length)
 {
     char *expression = new char[length];
+    for (int i = 0; i < length; i++)
+        expression[i] = 0;
+
     cin >> expression;
 
     return expression;
@@ -21,26 +24,37 @@ char *inputExpression(int length)
 
 int getValue(char a)
 {
-    return a - 48;
+    return a - '0';
 }
 
 char toChar(int a)
 {
-    return a + 48;
+    return a + '0';
 }
 
 char miniCalculate(char a, char b, char sign)
 {
     a = getValue(a); // '1' -> 1
     b = getValue(b);
-    if (sign == '*')
+
+    switch (sign)
+    {
+    case '*':
         return toChar(a * b);
-    if (sign == '/')
-        return toChar(a / b);
-    if (sign == '+')
+        break;
+    case '+':
         return toChar(a + b);
-    if (sign == '-')
+        break;
+    case '/':
+        return toChar(a / b);
+        break;
+    case '-':
         return toChar(a - b);
+        break;
+    default:
+        break;
+    }
+
     return -1;
 }
 
