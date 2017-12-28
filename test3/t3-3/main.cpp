@@ -40,6 +40,7 @@ int main()
         cin.get(c);
     }
 
+    cout << "Result : ";
     if (state == afterFirstLetter)
         cout << "true";
     else
