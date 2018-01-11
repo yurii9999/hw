@@ -4,8 +4,8 @@
 int const maxLength = 100000;
 int const maxLength2 = 1000;
 
-int const d = 13;
-int const q = 23 % d;
+int const hashMod = 13;
+int const letterCount = 23 % hashMod;
 
 using namespace std;
 
@@ -28,9 +28,9 @@ int getHash(char *string, int howMuch)
 
     int result = 0;
     for (int i = 0; i < length; i++)
-        result = (result * q +(int)string[i]) % d;
+        result = (result * letterCount +(int)string[i]) % hashMod;
 
-    return result % d;
+    return result % hashMod;
 }
 
 bool checkBySymbols(char *string, int from, char *substring)
@@ -43,7 +43,7 @@ bool checkBySymbols(char *string, int from, char *substring)
     return true;
 }
 
-int ab(int a, int b)
+int aDegreeB(int a, int b)
 {
     int result = 1;
     for (int i = 0; i < b; i++)
@@ -89,7 +89,7 @@ int main()
     }
 
 
-    int extraQ = ab(q, secondLength) % d;
+    int extraQ = aDegreeB(letterCount, secondLength) % hashMod;
 
     int wantedHash = getHash(substring, -1);
     int currentHash = getHash(string, secondLength);
@@ -102,9 +102,9 @@ int main()
 
     for (int i = 1; i < length - secondLength + 1; i++)
     {
-        currentHash = (currentHash * q) % d;
-        currentHash = currentHash - string[i - 1] * extraQ % d;
-        currentHash = (currentHash + string[i + secondLength - 1]) % d;
+        currentHash = (currentHash * letterCount) % hashMod;
+        currentHash = currentHash - string[i - 1] * extraQ % hashMod;
+        currentHash = (currentHash + string[i + secondLength - 1]) % hashMod;
         if (currentHash == wantedHash)
             if (checkBySymbols(string, i, substring))
                 push(begins, i);
