@@ -3,6 +3,26 @@
 
 using namespace std;
 
+enum toDo{quit = 0, addE = 1, removeE = 2, findE = 3, print1 = 4, print2 = 5, print3 = 6};
+
+toDo valToDo(int c)
+{
+    if (c == 0)
+        return quit;
+    if (c == 1)
+        return addE;
+    if (c == 2)
+        return removeE;
+    if (c == 3)
+        return findE;
+    if (c == 4)
+        return print1;
+    if (c == 5)
+        return print2;
+    if (c == 6)
+        return print3;
+}
+
 int main()
 {
     Tree* tree = createTree();
@@ -15,19 +35,16 @@ int main()
     cout << "\nEnter 5 to print tree lowest..biggest";
     cout << "\nEnter 6 to print tree biggest..lowest\n";
 
-    enum {quit = 0, addE = 1, removeE = 2, findE = 3, print1 = 4, print2 = 5, print3 = 6} toDo;
-
-    int c = 0;
-
+    toDo nowAction;
     do
     {
         cout << "Enter c: ";
+        int c = 0;
         cin >> c;
-        toDo = (enum) c;
-
+        nowAction = valToDo(c);
 
         int element = 0;
-        switch (toDo)
+        switch (nowAction)
         {
         case addE:
             cout << "Enter element: ";
@@ -61,7 +78,7 @@ int main()
             break;
         }
     }
-    while (toDo != quit);
+    while (nowAction != quit);
 
     deleteTree(tree);
 
