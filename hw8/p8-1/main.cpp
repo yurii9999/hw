@@ -28,7 +28,8 @@ int main()
     {
         cout << "Enter student's id and solver's id (0 if he hasnt): ";
         int id = 0;
-        cin >> id >> solversId[id];
+        cin >> id;
+        cin >> solversId[id];
     }
 
     for (int i = 1; i < amountPeople; i++)
