@@ -109,16 +109,17 @@ char *convert(char *expression, int length)
                 {
                     if (peek(signs) == '+' || peek(signs) == '-')
                         push(signs, expression[i]);
-                    if (peek(signs) == '/' || peek(signs) == '*')
-                    {
-                        char topSign = peek(signs);
-                        while (topSign != '+' && topSign != '-' && topSign != '(')
+                    else
+                        if (peek(signs) == '/' || peek(signs) == '*')
                         {
-                            newExpression[newLength] = pop(signs);
-                            newLength++;
-                            topSign = peek(signs);
+                            char topSign = peek(signs);
+                            while (topSign != '+' && topSign != '-' && topSign != '(')
+                            {
+                                newExpression[newLength] = pop(signs);
+                                newLength++;
+                                topSign = peek(signs);
+                            }
                         }
-                    }
                 }
                 if (expression[i] == '+' || expression[i] == '-')
                 {
