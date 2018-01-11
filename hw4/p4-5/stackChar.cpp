@@ -33,12 +33,15 @@ void push(Stack *stack, char value)
 char peek(Stack *stack)
 {
     if (isEmpty(stack))
-        return -1;
+        return 0;
     return peekListElement(stack->list, 0);
 }
 
 char pop(Stack *stack)
 {
+    if (isEmpty(stack))
+        return 0;
+
     char result = peekListElement(stack->list, 0);
     deleteElementFrom(stack->list, 0);
     return result;

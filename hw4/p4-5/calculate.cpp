@@ -99,6 +99,40 @@ char *convert(char *expression, int length)
             newLength ++;
         }
 
+        else
+        {
+            if (isEmpty(signs) || peek(signs) == '(')
+                push(signs, expression[i]);
+            else
+                if (expression[i] == '*' || expression[i] == '/')
+                {
+                    if (peek(signs) == '+' || peek(signs) == '-')
+                        push(signs, expression[i]);
+                    if (peek(signs) == '/' || peek(signs) == '*')
+                    {
+                        char topSign = peek(signs);
+                        while (topSign != '+' && topSign != '-' && topSign != '(')
+                        {
+                            newExpression[newLength] = pop(signs);
+                            newLength++;
+                            topSign = peek(signs);
+                        }
+                    }
+                }
+                if (expression[i] == '+' || expression[i] == '-')
+                {
+                    while (peek(signs) != '(')
+                    {
+                        newExpression[newLength] = pop(signs);
+                        newLength++;
+                    }
+                }
+
+
+
+
+        }
+        /*
         if (expression[i] == '*' || expression[i] == '/')
         {
             while (peek(signs) == '*' || peek(signs) == '/')
@@ -110,13 +144,14 @@ char *convert(char *expression, int length)
         }
         if (expression[i] == '+' || expression[i] == '-')
         {
-            while (peek(signs) == '+' || peek(signs) == '-' || peek(signs) == '+' || peek(signs) == '-')
+            while (peek(signs) == '+' || peek(signs) == '-')
             {
                 newExpression[newLength] = pop(signs);
                 newLength ++;
             }
             push(signs, expression[i]);
         }
+        */
 
         if (expression[i] == '(')
         {
