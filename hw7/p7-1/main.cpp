@@ -15,27 +15,31 @@ int main()
     cout << "\nEnter 5 to print tree lowest..biggest";
     cout << "\nEnter 6 to print tree biggest..lowest\n";
 
+    enum {quit = 0, addE = 1, removeE = 2, findE = 3, print1 = 4, print2 = 5, print3 = 6} toDo;
+
     int c = 0;
 
     do
     {
         cout << "Enter c: ";
         cin >> c;
+        toDo = (enum) c;
+
 
         int element = 0;
-        switch (c)
+        switch (toDo)
         {
-        case 1:
+        case addE:
             cout << "Enter element: ";
             cin >> element;
             add(tree, element);
             break;
-        case 2:
+        case removeE:
             cout << "Enter element: ";
             cin >> element;
             remove(tree, element);
             break;
-        case 3:
+        case findE:
             cout << "Enter element: ";
             cin >> element;
             if (contains(tree, element))
@@ -43,21 +47,21 @@ int main()
             else
                 cout << "it is not included";
             break;
-        case 4:
+        case print1:
             print(tree);
             cout << "\n";
             break;
-        case 5:
+        case print2:
             printLowestFirst(tree);
             cout << "\n";
             break;
-        case 6:
+        case print3:
             printBiggestFirst(tree);
             cout << "\n";
             break;
         }
     }
-    while (c != 0);
+    while (toDo != quit);
 
     deleteTree(tree);
 
