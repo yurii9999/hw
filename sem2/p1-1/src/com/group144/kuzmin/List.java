@@ -2,31 +2,27 @@ package com.group144.kuzmin;
 
 public class List {
     private ListElement head;
+    private int size;
 
     public boolean isEmpty() {
-
-        return this.head == null;
+        return size == 0;
     }
 
     public int size() {
-        ListElement temp = this.head;
-        int result = 0;
-
-        while (temp != null) {
-            result++;
-            temp = temp.next;
-        }
-
-        return result;
+        return size;
     }
 
     public void add(int value, int position) {
+        if (position > size || position < 0)
+            return;
+
+        size++;
         if (position == 0) {
-            this.head = new ListElement(value, this.head);
+            head = new ListElement(value, head);
             return;
         }
 
-        ListElement temp = this.head;
+        ListElement temp = head;
 
         for (int i = 1; i < position; i++)
             temp = temp.next;
@@ -35,7 +31,7 @@ public class List {
     }
 
     public int peek(int position) {
-        ListElement temp = this.head;
+        ListElement temp = head;
 
         for (int i = 0; i < position; i++)
             temp = temp.next;
@@ -44,21 +40,26 @@ public class List {
     }
 
     public void delete(int position) {
+        if (position >= size || position < 0)
+            return;
+
+        size--;
         if (position == 0) {
-            this.head = this.head.next;
+            head = head.next;
             return;
         }
 
-        ListElement temp  = this.head;
+        ListElement temp  = head;
 
         for (int i = 1; i < position; i++)
             temp = temp.next;
 
         temp.next = temp.next.next;
+
     }
 
     public void print() {
-        ListElement temp = this.head;
+        ListElement temp = head;
         int i = 0;
 
         while (temp != null) {

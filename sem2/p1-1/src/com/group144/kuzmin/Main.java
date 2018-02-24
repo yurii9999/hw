@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 public class Main {
 
+    public enum action {
+        PUSH,
+        POP,
+        PEEK,
+        PRINT,
+        GET_SIZE,
+        EXIT
+    }
+
     public static void main(String[] args) {
 
         Stack stack = new Stack();
@@ -39,14 +48,5 @@ public class Main {
                         break;
             }
         } while (action.values()[toDo] != action.EXIT);
-    }
-
-    public enum action {
-        PUSH,
-        POP,
-        PEEK,
-        PRINT,
-        GET_SIZE,
-        EXIT
     }
 }
