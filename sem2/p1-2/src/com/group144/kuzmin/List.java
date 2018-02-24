@@ -16,6 +16,7 @@ public class List {
         if (position > size || position < 0)
             return;
 
+        size++;
         if (position == 0) {
             head = new ListElement(value, head);
             return;
@@ -27,8 +28,6 @@ public class List {
             temp = temp.next;
 
         temp.next = new ListElement(value, temp.next);
-
-        size++;
     }
 
     public int peek(int position) {
@@ -44,6 +43,7 @@ public class List {
         if (position >= size || position < 0)
             return;
 
+        size--;
         if (position == 0) {
             head = head.next;
             return;
@@ -56,7 +56,6 @@ public class List {
 
         temp.next = temp.next.next;
 
-        size--;
     }
 
     public void print() {
