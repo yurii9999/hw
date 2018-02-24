@@ -4,13 +4,22 @@ import java.util.Scanner;
 
 public class Main {
 
+    public enum action {
+        ADD,
+        PRINT,
+        DELETE,
+        PEEK,
+        GET_SIZE,
+        EXIT
+    }
+
     public static void main(String[] args) {
         List list = new List();
 
         Scanner in = new Scanner(System.in);
         int toDo = 0;
         do {
-            System.out.println("ADD -- 0\nPRINT -- 1\nDELET E -- 2\nPEEK -- 3\nGET_SIZE -- 4\nEXIT -- 5\nEnter toDo: ");
+            System.out.println("ADD -- 0\nPRINT -- 1\nDELETE -- 2\nPEEK -- 3\nGET_SIZE -- 4\nEXIT -- 5\nEnter toDo: ");
             int value = 0;
             int position = 0;
 
@@ -46,14 +55,5 @@ public class Main {
             }
         } while (action.values()[toDo] != action.EXIT);
 
-    }
-
-    public enum action {
-        ADD,
-        PRINT,
-        DELETE,
-        PEEK,
-        GET_SIZE,
-        EXIT
     }
 }
