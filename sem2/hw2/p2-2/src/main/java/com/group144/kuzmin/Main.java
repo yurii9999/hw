@@ -1,26 +1,42 @@
 package com.group144.kuzmin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        int[][] array =         {
-                {
-                        0, 5, 10, 15, 20
-                },
-                {
-                        1, 6, 11, 16, 21
-                },
-                {
-                        2, 7, 12, 17, 22
-                },
-                {
-                        3, 8, 13, 18, 23
-                },
-                {
-                        4, 9, 14, 19, 24
-                }
-        };
-        Printer printer = new ConsolePrinter();
+        int[][] array;
+        int edgeSize;
+        try {
+            Scanner ifstream = new Scanner(new File("input.txt"));
+            edgeSize = ifstream.nextInt();
+            array = new int[edgeSize][edgeSize];
+            for (int j = 0; j < edgeSize; j++)
+                for (int i = 0; i < edgeSize; i++)
+                    array[i][j] = ifstream.nextInt();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find file");
+            return;
+        }
+
+        System.out.println("Enter 0 to print to console, 1 to file");
+        Scanner in = new Scanner(System.in);
+        Printer printer = null;
+        printerChoice action = printerChoice.values()[in.nextInt()];
+        switch (action) {
+            case CONSOLE:
+                printer = new ConsolePrinter();
+                break;
+            case FILE:
+            printer = new FilePrinter();
+            break;
+        }
         printer.printArray(array);
+    }
+
+    public enum printerChoice {
+        CONSOLE, FILE
     }
 }
