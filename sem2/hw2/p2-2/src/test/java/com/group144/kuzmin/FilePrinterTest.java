@@ -4,20 +4,20 @@ import org.junit.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 import static org.junit.Assert.*;
 
 public class FilePrinterTest {
     @Test
-    public void printArrayTest() {
-        int[][] array = {{1, 4, 7}, {2, 5, 8}, {3, 6, 9}};
-        int[] right = {5, 2, 3, 6, 9, 8, 7, 4, 1};
+    public void filePrinterTest() {
+        String spuralOrder = "5 2 3 6 9 8 7 4 1";
 
         Printer printer = new FilePrinter();
+        printer.print(spuralOrder);
 
-        printer.printArray(array);
-
-        final int length = array.length * array[0].length;
+        int[] array = {5, 2, 3, 6, 9, 8, 7, 4, 1};
+        final int length = array.length;
         int[] result = new int[length];
 
         try (FileReader reader = new FileReader("output.txt"))
@@ -28,9 +28,17 @@ public class FilePrinterTest {
             }
         }
         catch (IOException ex) {
-            fail();
         }
 
-            assertArrayEquals(right, result);
+        assertArrayEquals(array, result);
+    }
+
+    @Test
+    public void convertArrayTest() {
+        int[][] array = {{1, 4, 7}, {2, 5, 8}, {3, 6, 9}};
+        String correct = "5 2 3 6 9 8 7 4 1";
+        String actual = ArrayConvertor.toSpural(array);
+
+        assertEquals(correct, actual);
     }
 }

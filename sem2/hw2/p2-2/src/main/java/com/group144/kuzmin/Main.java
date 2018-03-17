@@ -30,10 +30,10 @@ public class Main {
                 printer = new ConsolePrinter();
                 break;
             case FILE:
-            printer = new FilePrinter();
-            break;
+                printer = new FilePrinter();
+                break;
         }
-        printer.printArray(array);
+        printer.print(ArrayConvertor.toSpural(array));
     }
 
     public enum printerChoice {
