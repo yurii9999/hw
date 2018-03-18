@@ -15,21 +15,32 @@ public class HashTable {
         this.hasher = hasher;
     }
 
-
+    /**
+     * Method adds elements in hash table
+     * @param element element which you want to add
+     */
     public void add(Element element) {
         int hash = hasher.getHash(element.string(), arraySize);
         data[hash].add(element, 0);
     }
 
-    public void delete(String key) throws NotFoundExcaption{
+    /**
+     * Method deletes elements from HT by key
+     *
+     * @param key given key
+     * @throws NotFoundException throws when HT is not included elements with this key
+     */
+    public void delete(String key) throws NotFoundException {
         int hash = hasher.getHash(key, arraySize);
-        try {
-            data[hash].deleteByKey(key);
-        } catch (NotFoundExcaption notFoundExcaption) {
-            throw new NotFoundExcaption();
-        }
+        data[hash].deleteByKey(key);
     }
 
+    /**
+     * Method rebuilds hash table: change hasher and amount filed
+     *
+     * @param hasher new hasher
+     * @param newSize new size
+     */
     public void rebuild(Hasher hasher, int newSize) {
         this.hasher = hasher;
 
@@ -49,32 +60,51 @@ public class HashTable {
             }
     }
 
+    /**
+     * Method checks is element included in HT by key
+     *
+     * @param key given key
+     * @return true if HT includes and false otherwise
+     */
     public boolean isIncluded(String key) {
         int hash = hasher.getHash(key, arraySize);
         return data[hash].isIncluded(key);
     }
 
-    Element getElement(String key) throws NotFoundExcaption {
+    /**
+     * Method give element from HT by key
+     *
+     * @param key given key
+     * @return element that's key is equal given
+     * @throws NotFoundException throws when HT is not included element with this key
+     */
+    Element getElement(String key) throws NotFoundException {
         int hash = hasher.getHash(key, arraySize);
-        try {
-            return data[hash].getByKey(key);
-        }
-        catch (NotFoundExcaption e) {
-            throw e;
-        }
+        return data[hash].getByKey(key);
     }
 
-    public void print() {
-        for (int i = 0; i < arraySize; i++) {
-            System.out.println("========\nList " + i + " :");
-            data[i].print();
-        }
+    @Override
+    public String toString() {
+        StringBuffer result = new StringBuffer("");
+
+        for (int i = 0; i < arraySize; i++)
+            result.append(i + ": " + data[i] + '\n');
+
+        return result.toString();
     }
 
+    /**
+     * Method gives amount field int HT
+     * @return amount fields
+     */
     public int arraySize() {
         return arraySize;
     }
 
+    /**
+     * Method gives max HT's fields' length
+     * @return max length of field
+     */
     public int maxLength() {
         int result = data[0].size();
         for (int i = 1; i < arraySize; i++)
@@ -84,6 +114,10 @@ public class HashTable {
         return result;
     }
 
+    /**
+     * Method gives amount fields that includes more than one element
+     * @return amount fields
+     */
     public int amountConflicts() {
         int result = 0;
         for (int i = 0; i < arraySize; i++)
@@ -93,6 +127,10 @@ public class HashTable {
         return result;
     }
 
+    /**
+     * Methods gives amount elements in HT in all fields
+     * @return amount elements
+     */
     public int size() {
         int result = 0;
 
@@ -102,6 +140,10 @@ public class HashTable {
         return result;
     }
 
+    /**
+     * Method calculates load factor
+     * @return load factor
+     */
     public double loadFactor(){
         return (double) size() / arraySize;
     }

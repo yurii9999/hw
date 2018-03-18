@@ -1,11 +1,16 @@
 package com.group144.kuzmin;
 
-import java.lang.Exception;
-
 public class HashTableList extends List<Element> {
 
-    public Element getByKey(String key) throws NotFoundExcaption {
-        ListElement<Element> temp = head;
+    /**
+     * Method gives element by key
+     *
+     * @param key key of element
+     * @return element that's key is equal given key
+     * @throws NotFoundException if there is no element with given key in list
+     */
+    public Element getByKey(String key) throws NotFoundException {
+        ListElement temp = head;
 
         for (int i = 0; i < size; i++) {
             if (temp.value.compareTo(key) == 0)
@@ -14,11 +19,17 @@ public class HashTableList extends List<Element> {
             temp = temp.next;
         }
 
-        throw new NotFoundExcaption();
+        throw new NotFoundException();
     }
 
+    /**
+     * Method check is there any element's with this key
+     *
+     * @param key given key
+     * @return true if list includes and false otherwise
+     */
     public boolean isIncluded(String key) {
-        ListElement<Element> temp = head;
+        ListElement temp = head;
 
         for (int i = 0; i < size; i++)
             if (temp.value.compareTo(key) == 0)
@@ -27,15 +38,21 @@ public class HashTableList extends List<Element> {
         return false;
     }
 
-    public void deleteByKey (String key) throws NotFoundExcaption {
+    /**
+     * Method delete element from list by key
+     *
+     * @param key given key
+     * @throws NotFoundException if there is no element whit given key in list
+     */
+    public void deleteByKey (String key) throws NotFoundException {
         if (head.value.compareTo(key) == 0) {
             head = head.next;
             size--;
             return;
         }
 
-        ListElement<Element> temp = head;
-        ListElement<Element> previous = null;
+        ListElement temp = head;
+        ListElement previous = null;
 
         for (int i = 1; i < size; i++) {
             if (temp.value.compareTo(key) == 0) {
@@ -47,10 +64,6 @@ public class HashTableList extends List<Element> {
             temp = temp.next;
         }
 
-        throw new NotFoundExcaption();
+        throw new NotFoundException();
     }
-}
-
-class NotFoundExcaption extends Exception {
-    public NotFoundExcaption() {}
 }

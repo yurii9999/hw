@@ -42,7 +42,7 @@ public class Main {
                     key = in.next();
                     try {
                         table.delete(key);
-                    } catch (NotFoundExcaption notFoundExcaption) {
+                    } catch (NotFoundException notFoundExcaption) {
                         System.out.println("Incorrect key");
                     }
                     break;
@@ -70,12 +70,12 @@ public class Main {
                     try {
                         result = table.getElement(key);
                         System.out.println(result);
-                    } catch (NotFoundExcaption notFoundExcaption) {
+                    } catch (NotFoundException notFoundExcaption) {
                         System.out.println("Incorrect key");
                     }
                     break;
                 case PRINT:
-                    table.print();
+                    System.out.println(table);
                     break;
                 case IS_INCLUDED:
                     System.out.println("Enter key: ");

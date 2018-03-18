@@ -1,17 +1,33 @@
 package com.group144.kuzmin;
 
 public class List<T> {
-    protected ListElement<T> head;
+    protected ListElement head;
     protected int size;
 
+    /**
+     * M check is list empty
+     *
+     * @return false if list is empty, true if list is not empty
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * M give list's size
+     *
+     * @return list's size
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * M adds elements to list
+     *
+     * @param value element's value
+     * @param position position that element will be added
+     */
     public void add(T value, int position) {
         if (position > size || position < 0)
             return;
@@ -30,8 +46,14 @@ public class List<T> {
         temp.next = new ListElement(value, temp.next);
     }
 
+    /**
+     * Method peek list's elements
+     *
+     * @param position position from you want to get element
+     * @return element from position
+     */
     public T peek(int position) {
-        ListElement<T> temp = head;
+        ListElement temp = head;
 
         for (int i = 0; i < position; i++)
             temp = temp.next;
@@ -39,6 +61,13 @@ public class List<T> {
         return temp.value;
     }
 
+
+    /**
+     * Mehod deletes list's elements
+     *
+     * @param position position from you want delete element
+     * @return
+     */
     public void delete(int position) {
         if (position >= size || position < 0)
             return;
@@ -55,21 +84,31 @@ public class List<T> {
             temp = temp.next;
 
         temp.next = temp.next.next;
-
     }
 
-    public void print() {
-        ListElement temp = head;
-        int i = 0;
+    /**
+     * Method converts list to string
+     *
+     * @return [el0 el1 ..]
+     */
 
-        while (temp != null) {
-            System.out.println("Pos: " + i + " value: " + temp.value);
+    @Override
+    public String toString() {
+        if (isEmpty())
+            return "[ ]";
+
+        StringBuffer result = new StringBuffer("[" + head.value.toString());
+
+        ListElement temp = head.next;
+        for (int i = 1; i < size; i++) {
+            result.append(" " + temp.value);
             temp = temp.next;
-            i++;
         }
+
+        return result.append("]").toString();
     }
 
-    protected class ListElement<T> {
+    protected class ListElement {
         protected T value;
         protected ListElement next;
 

@@ -23,8 +23,7 @@ public class HashTableTest {
         HashTable table = prepareTable();
         try {
             assertEquals(table.getElement("element3").value(), 3);
-        } catch (NotFoundExcaption notFoundExcaption) {
-            fail();
+        } catch (NotFoundException e) {
         }
     }
 
