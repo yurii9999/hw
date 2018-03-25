@@ -9,6 +9,11 @@ public class ExpressionParser {
         i = 0;
     }
 
+    /**
+     * Method search first token ( "(" or number)
+     *
+     * @return token
+     */
     public String nextToken() {
         char currentChar;
         do {
@@ -18,15 +23,20 @@ public class ExpressionParser {
         if (peek() == ' ' || currentChar == '(')
             return "" + currentChar;
 
-        String result = "";
+        StringBuffer result = new StringBuffer("");
             do {
-                result += currentChar;
+                result.append(currentChar);
                 currentChar = next();
             } while(currentChar != ' ' && currentChar != ')');
 
-        return result;
+        return result.toString();
     }
 
+    /**
+     * Method show next char in parsing string
+     *
+     * @return next char of string
+     */
     private char peek() {
         if (i >= expression.length())
             return ' ';
@@ -34,6 +44,11 @@ public class ExpressionParser {
         return expression.charAt(i);
     }
 
+    /**
+     * Method show next char in parsing string and move pointer forward
+     *
+     * @return next char of string
+     */
     private char next() {
         if (i >= expression.length())
             return ' ';
@@ -41,15 +56,5 @@ public class ExpressionParser {
         i++;
 
         return result;
-    }
-
-    private static class Checker {
-        public static boolean isSign(char c) {
-            return c == '+' || c == '-' || c == '*' || c == '/';
-        }
-
-        public static boolean isDigit(char c) {
-            return c >= '0' && c <= '9';
-        }
     }
 }

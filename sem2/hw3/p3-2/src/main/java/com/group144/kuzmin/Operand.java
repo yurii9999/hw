@@ -7,10 +7,11 @@ public class Operand extends Node {
     }
 
     @Override
-    public void print() {
-        System.out.print(data);
+    public String toString() {
+        return data;
     }
 
+    /** @return data.toString */
     @Override
     public int calculate() {
         return Integer.parseInt(data);

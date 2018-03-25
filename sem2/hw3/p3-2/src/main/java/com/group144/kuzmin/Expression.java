@@ -8,14 +8,19 @@ public class Expression {
         ExpressionParser parser = new ExpressionParser(expression);
         root = new Operator(parser);
     }
+
+    /** Method calculates expression */
     public int calculate() {
         return root.calculate();
     }
 
-    public void print() {
-        root.print();
+    /** Method converts expression tree to string with relationships */
+    @Override
+    public String toString() {
+        return root.toString();
     }
 
+    /** Method build expression tree by string with expression */
     private static class Convertor {
         public static String convert(String string) {
             if (string.charAt(0) == '(')

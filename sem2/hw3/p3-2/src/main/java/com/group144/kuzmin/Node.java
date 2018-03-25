@@ -5,6 +5,10 @@ public abstract class Node {
     protected Node left;
     protected String data;
 
-    public abstract void print();
+    /**
+     * Method calculate node of tree
+     *
+     * @return result of calculate
+     */
     public abstract int calculate();
 }

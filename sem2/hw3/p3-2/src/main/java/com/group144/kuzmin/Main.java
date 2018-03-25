@@ -19,7 +19,6 @@ public class Main {
 
         Expression expression = new Expression(file);
 
-        expression.print();
-        System.out.print(" = " + expression.calculate());
+        System.out.println(expression + " = " + expression.calculate());
     }
 }

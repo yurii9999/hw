@@ -20,14 +20,15 @@ public class Operator extends Node {
     }
 
     @Override
-    public void print() {
-        System.out.print("(" + data + " ");
-        left.print();
-        System.out.print(" ");
-        right.print();
-        System.out.print(")");
+    public String toString() {
+        return ("(" + data + " " + left + " " + right + ")");
     }
 
+    /**
+     * Method calculate node recurrently
+     *
+     * @return result of calculate
+     */
     @Override
     public int calculate() {
         switch (data) {

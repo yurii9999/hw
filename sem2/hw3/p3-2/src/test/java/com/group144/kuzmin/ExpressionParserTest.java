@@ -17,6 +17,5 @@ public class ExpressionParserTest {
             result[i] = parser.nextToken();
 
         assertArrayEquals(right, result);
-
     }
 }
