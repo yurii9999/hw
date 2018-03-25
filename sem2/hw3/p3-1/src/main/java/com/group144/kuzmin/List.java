@@ -7,7 +7,7 @@ public class List<T> {
     /**
      * M check is list empty
      *
-     * @return false if list is empty, true if list is not empty
+     * @return true if list is empty, false if list is not empty
      */
     public boolean isEmpty() {
         return size == 0;

@@ -51,8 +51,8 @@ public class HashTableList extends List<Element> {
             return;
         }
 
-        ListElement temp = head;
-        ListElement previous = null;
+        ListElement temp = head.next;
+        ListElement previous = head;
 
         for (int i = 1; i < size; i++) {
             if (temp.value.compareTo(key) == 0) {

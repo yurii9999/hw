@@ -6,15 +6,11 @@ import static org.junit.Assert.*;
 public class HashTableListTest {
 
     @Test
-    public void deleteTest() {
+    public void deleteTest() throws NotFoundException {
         HashTableList list = prepareList();
 
-        try {
-            for (int i = 0; i < 10; i++)
-                list.deleteByKey("element" + i);
-        } catch (NotFoundException e) {
-            fail();
-        }
+        for (int i = 0; i < 10; i++)
+            list.deleteByKey("element" + i);
 
         assertTrue(list.isEmpty());
     }
@@ -32,22 +28,17 @@ public class HashTableListTest {
     }
 
     @Test
-    public void getByKeyTest() {
+    public void getByKeyTest() throws NotFoundException {
         HashTableList list = prepareList();
-        Element element = null;
-        try {
-            element = list.getByKey("element5");
-        } catch (NotFoundException e) {
-            fail();
-        }
+        Element element = list.getByKey("element5");
 
         assertEquals(element.value(), 5);
     }
 
     @Test(expected = NotFoundException.class)
-    public void NotFoundExceptionTest() {
+    public void NotFoundExceptionTest() throws NotFoundException {
         HashTableList list = prepareList();
-//        list.deleteByKey("element30");
+        list.deleteByKey("element30");
         }
 
     private HashTableList prepareList() {

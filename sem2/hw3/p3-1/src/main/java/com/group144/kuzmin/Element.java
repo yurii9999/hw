@@ -24,6 +24,6 @@ public class Element implements Comparable<String> {
 
     @Override
     public String toString() {
-        return "String: " + string + ", Value: " + value;
+        return string + ":" + value;
     }
 }

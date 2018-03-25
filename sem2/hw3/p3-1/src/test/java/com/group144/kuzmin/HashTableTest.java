@@ -19,12 +19,9 @@ public class HashTableTest {
     }
 
     @Test
-    public void getElementTest() {
+    public void getElementTest() throws NotFoundException {
         HashTable table = prepareTable();
-        try {
-            assertEquals(table.getElement("element3").value(), 3);
-        } catch (NotFoundException e) {
-        }
+        assertEquals(table.getElement("element3").value(), 3);
     }
 
     private HashTable prepareTable() {
