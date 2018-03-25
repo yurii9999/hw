@@ -1,7 +1,7 @@
 package com.group144.kuzmin;
 
 public class List<T> {
-    private ListElement<T> head;
+    private ListElement head;
     private int size;
 
     public boolean isEmpty() {
@@ -37,13 +37,13 @@ public class List<T> {
     }
 
     /**
-     * Method return list's element
+     * Method returns list's element
      *
      * @param position - position of element you want to get
      * @return element on this position
      */
     public T peek(int position) {
-        ListElement<T> temp = head;
+        ListElement temp = head;
 
         for (int i = 0; i < position; i++)
             temp = temp.next;
@@ -78,10 +78,11 @@ public class List<T> {
      * Method deletes elements from list
      *
      * @param element - method first element that is equal this
+     * @throws NotFoundException throws when element you want to delete is not included in list
      */
-    public void delete(T element) {
+    public void delete(T element) throws NotFoundException {
             if (!isIncluded(element))
-                return;
+                throw new NotFoundException();
 
         if (head.value.equals(element)) {
             head = head.next;
@@ -89,8 +90,8 @@ public class List<T> {
             return;
         }
 
-        ListElement<T> temp = head.next;
-        ListElement<T> previous = head;
+        ListElement temp = head.next;
+        ListElement previous = head;
 
         for (int i = 1; i < size(); i++) {
             if (temp.value.equals(element)) {
@@ -102,15 +103,17 @@ public class List<T> {
             previous = temp;
             temp = temp.next;
         }
+
+        throw new NotFoundException();
     }
 
     @Override
     public String toString() {
-        ListElement<T> temp = head;
-        String result = "[";
+        ListElement temp = head;
+        StringBuffer result = new StringBuffer("[");
 
         for (int i = 0; i < size; i++) {
-            result += temp.value + ", ";
+            result.append(temp.value + ", ");
             temp = temp.next;
         }
 
@@ -125,7 +128,7 @@ public class List<T> {
      * @return false if the element is not included
      */
     public boolean isIncluded(T element) {
-        ListElement<T> temp = head;
+        ListElement temp = head;
 
         for (int i = 0; i < size; i++) {
             if (temp.value.equals(element))
@@ -137,7 +140,7 @@ public class List<T> {
         return false;
     }
 
-    private class ListElement<T> {
+    private class ListElement {
         private T value;
         private ListElement next;
 

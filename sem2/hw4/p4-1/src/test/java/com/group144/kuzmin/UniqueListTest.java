@@ -14,13 +14,13 @@ public class UniqueListTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void NotFoundExceptionTest() {
+    public void NotFoundExceptionTest() throws NotFoundException {
         List<Integer> emptyList = new UniqueList<>();
         emptyList.delete((Integer) 3);
     }
 
     @Test(expected = NotFoundException.class)
-    public void deleteDeleteTest() {
+    public void deleteDeleteTest() throws NotFoundException {
         List<Integer> list = new UniqueList<>();
         list.add(3, 0);
         list.delete((Integer) 3);
