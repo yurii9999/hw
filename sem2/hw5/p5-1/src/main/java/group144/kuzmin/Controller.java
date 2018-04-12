@@ -1,3 +1,5 @@
+package group144.kuzmin;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
