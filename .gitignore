@@ -3,3 +3,6 @@
 *build
 *iml
 *.class
+.gradle/
+.idea
+out/
