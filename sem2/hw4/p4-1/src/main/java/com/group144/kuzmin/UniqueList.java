@@ -9,7 +9,7 @@ public class UniqueList<T> extends List<T> {
      * @throws AlreadyIncludedException if element already added to list
      */
     @Override
-    public void add(T value, int position) {
+    public void add(T value, int position) throws AlreadyIncludedException {
         if (isIncluded(value))
             throw new AlreadyIncludedException();
 
