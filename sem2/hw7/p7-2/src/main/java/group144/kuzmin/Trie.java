@@ -63,12 +63,26 @@ public class Trie implements Serializable {
         return root.howManyStartWithPrefix(new Parser(prefix));
     }
 
+    /**
+     * Serialize trie on stream
+     *
+     * @param oos stream you want to serialize trie on
+     * @throws IOException "Any exception thrown by the underlying
+     *          "upd: Object"OutputStream."
+     */
     public void serialize(ObjectOutputStream oos) throws IOException {
         oos.writeObject(this);
         oos.flush();
     }
 
-    public void deserialize(ObjectInputStream in) throws IOException, IncorrectStreamException {
+    /**
+     * build trie by input stream
+     *
+     * @param in input stream
+     * @throws IOException when st wrong with ObjectInputStream
+     * @throws IncorrectStreamException when you give him stream of another serialized types
+     */
+    public void deserialize(ObjectInputStream in) throws IncorrectStreamException, IOException {
         Trie temp = null;
         try {
             temp = (Trie) in.readObject();
