@@ -63,8 +63,9 @@ public class Trie implements Serializable {
         return root.howManyStartWithPrefix(new Parser(prefix));
     }
 
-    public void serialize(ObjectOutputStream out) throws IOException {
-        out.writeObject(this);
+    public void serialize(ObjectOutputStream oos) throws IOException {
+        oos.writeObject(this);
+        oos.flush();
     }
 
     public void deserialize(ObjectInputStream in) throws IOException, IncorrectStreamException {
@@ -80,7 +81,7 @@ public class Trie implements Serializable {
     }
 
 
-    private class Node {
+    private class Node implements Serializable {
         private final static int ALPHABET = 256;
         private int amountWords;
         private boolean isTerminal;

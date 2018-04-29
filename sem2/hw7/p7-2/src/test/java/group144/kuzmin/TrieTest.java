@@ -62,30 +62,30 @@ public class TrieTest {
         assertEquals(3, trie.size());
     }
 
-//    @Test
-//    public void serializeAndDeserializeTest() throws IOException, IncorrectStreamException, ClassNotFoundException {
-//        final String FILE_NAME = "test.txt";
-//        Trie trie = new Trie();
-//
-//        trie.add("testString");
-//
-//
-//        ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
-//        oo.writeObject(trie);
-//
-//        ObjectInput oi = new ObjectInputStream(new FileInputStream(FILE_NAME));
-//        Trie trie2 = (Trie) oi.readObject();
-//
-//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
-//        trie.serialize(oos);
-//        oos.close();
-//
-//        trie = new Trie();
-//        assertFalse(trie.contains("testString"));
-//
-//        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME));
-//        trie.deserialize(ois);
-//
-//        assertTrue(trie.contains("testString"));
-//    }
+    @Test
+    public void serializeAndDeserializeTest() throws IOException, IncorrectStreamException, ClassNotFoundException {
+        final String FILE_NAME = "test.txt";
+        Trie trie = new Trie();
+
+        trie.add("testString");
+
+
+        ObjectOutput oo = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
+        oo.writeObject(trie);
+
+        ObjectInput oi = new ObjectInputStream(new FileInputStream(FILE_NAME));
+        Trie trie2 = (Trie) oi.readObject();
+
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
+        trie.serialize(oos);
+        oos.close();
+
+        trie = new Trie();
+        assertFalse(trie.contains("testString"));
+
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME));
+        trie.deserialize(ois);
+
+        assertTrue(trie.contains("testString"));
+    }
 }
