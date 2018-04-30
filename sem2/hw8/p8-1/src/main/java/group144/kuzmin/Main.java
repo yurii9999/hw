@@ -10,7 +10,10 @@ public class Main {
         final int MAX = 20000;
         Random random = new Random();
 
-        Integer[] sortBySingleThread = Stream.generate(() -> random.nextInt(MAX)).limit(SIZE).toArray(Integer[]::new);
+        Integer[] sortBySingleThread = Stream
+                .generate(() -> random.nextInt(MAX))
+                .limit(SIZE)
+                .toArray(Integer[]::new);
         Integer[] sortByMultiThread = copy(sortBySingleThread);
 
         Date beginST = new Date();
