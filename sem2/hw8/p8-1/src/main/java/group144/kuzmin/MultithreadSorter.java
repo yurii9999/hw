@@ -38,14 +38,16 @@ public class MultithreadSorter {
 
         final int mark = i;
 
-        Runnable firstPart = () -> sortPart(array, comparator, from, mark - 1);
-        Runnable secondPart = () -> sortPart(array, comparator, mark, to);
+        Runnable firstPartSort = () -> sortPart(array, comparator, from, mark - 1);
 
-        Thread leftSide = new Thread(firstPart);
-        Thread rightSide = new Thread(secondPart);
+        Thread firstPartThread = new Thread(firstPartSort);
 
-        leftSide.start();
-        rightSide.start();
+        firstPartThread.start();
+        try {
+            firstPartThread.join();
+        } catch (InterruptedException e) {
+            return;
+        }
     }
 
     private static <T> void swap(T[] array, int i, int j) {
