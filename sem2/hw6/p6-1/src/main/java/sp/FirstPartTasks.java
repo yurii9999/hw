@@ -56,13 +56,12 @@ public final class FirstPartTasks {
 
     // Число повторяющихся альбомов в потоке
     public static long countAlbumDuplicates(Stream<Album> albums) {
-        final long firstCount[] = new long[1];
-        long lastCount = albums
-                .map(a -> {firstCount[0]++; return a;})
-                .distinct()
+        return albums
+                .collect(Collectors.groupingBy(a -> a.getName()))
+                .entrySet()
+                .stream()
+                .filter(a -> a.getValue().size() > 1)
                 .count();
-
-        return firstCount[0] - lastCount;
     }
 
     // Альбом, в котором максимум рейтинга минимален
