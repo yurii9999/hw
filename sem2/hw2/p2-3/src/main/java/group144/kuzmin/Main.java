@@ -4,5 +4,7 @@ public class Main {
     public static void main(String[] args) {
         StackCalculator a = new StackCalculator("3 44 +");
         System.out.println(a.calculate());
+        System.out.println(a.calculate());
+        System.out.println(a.calculate());
     }
 }

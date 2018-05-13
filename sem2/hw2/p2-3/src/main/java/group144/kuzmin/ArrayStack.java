@@ -2,7 +2,7 @@ package group144.kuzmin;
 
 import java.util.EmptyStackException;
 
-public class ArrayStack<T> implements Stack<T> {
+public class ArrayStack<T> implements Stack<T>{
     private final int FIRST_ARRAY_SIZE = 20;
     private T[] data;
     private int pointer;
@@ -14,14 +14,22 @@ public class ArrayStack<T> implements Stack<T> {
         pointer = 0;
     }
 
+    /**
+     * Method adds value on the top of stack
+     * @param value value you want to add
+     */
     @Override
     public void push(T value) {
         data[pointer] = value;
         pointer++;
-        if (pointer == nowArraySize)
-            increaseSize();
+        updateSize();
     }
 
+    /**
+     * Method returns value from the top and remove it
+     * @return value that was on the top
+     * @throws EmptyStackException throws when stack is empty
+     */
     @Override
     public T pop() throws EmptyStackException {
         if (pointer == 0)
@@ -30,28 +38,39 @@ public class ArrayStack<T> implements Stack<T> {
         pointer--;
         T result = data[pointer];
         data[pointer] = null;
-        if (pointer < nowArraySize / 2 && nowArraySize > FIRST_ARRAY_SIZE)
-            reduceSize();
+        updateSize();
 
         return result;
     }
 
+    /**
+     * Method check is stack empty
+     * @return true when stack is empty and false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return pointer == 0;
     }
 
-    private void increaseSize() {
-        T[] oldData = data;
-        data = (T[]) new Object[nowArraySize * 2];
-        for (int i = 0; i < oldData.length; i++)
-            data[i] = oldData[i];
-    }
+    /** Method increase array size if it is small and reduce if it is large */
+    private void updateSize() {
+        if (pointer == nowArraySize) {
+            // Increase size
+            T[] oldData = data;
+            data = (T[]) new Object[nowArraySize * 2];
+            for (int i = 0; i < oldData.length; i++)
+                data[i] = oldData[i];
 
-    private void reduceSize() {
-        T[] oldData = data;
-        data = (T[]) new Object[nowArraySize / 2];
-        for (int i = 0; i < oldData.length; i++)
-            data[i] = oldData[i];
+            return;
+        }
+
+
+        if (pointer < nowArraySize / 2 && nowArraySize > FIRST_ARRAY_SIZE) {
+            // Reduce size
+            T[] oldData = data;
+            data = (T[]) new Object[nowArraySize / 2];
+            for (int i = 0; i < oldData.length; i++)
+                data[i] = oldData[i];
+        }
     }
 }

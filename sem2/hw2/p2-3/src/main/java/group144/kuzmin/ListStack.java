@@ -11,11 +11,20 @@ public class ListStack<T> implements Stack<T> {
         data = new LinkedList();
     }
 
+    /**
+     * Method adds value on the top of stack
+     * @param value value you want to add
+     */
     @Override
     public void push(T value) {
         data.add(value);
     }
 
+    /**
+     * Method returns value from the top and remove it
+     * @return value that was on the top
+     * @throws EmptyStackException throws when stack is empty
+     */
     @Override
     public T pop() throws EmptyStackException {
         if (isEmpty())
@@ -26,6 +35,10 @@ public class ListStack<T> implements Stack<T> {
         return result;
     }
 
+    /**
+     * Method check is stack empty
+     * @return true when stack is empty and false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return data.isEmpty();
