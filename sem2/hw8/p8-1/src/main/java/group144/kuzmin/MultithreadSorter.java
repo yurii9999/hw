@@ -43,6 +43,8 @@ public class MultithreadSorter {
         Thread firstPartThread = new Thread(firstPartSort);
 
         firstPartThread.start();
+        sortPart(array, comparator, mark, to);
+
         try {
             firstPartThread.join();
         } catch (InterruptedException e) {
