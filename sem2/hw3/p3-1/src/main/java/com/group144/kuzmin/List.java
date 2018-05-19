@@ -63,10 +63,9 @@ public class List<T> {
 
 
     /**
-     * Mehod deletes list's elements
+     * Method deletes list's elements
      *
      * @param position position from you want delete element
-     * @return
      */
     public void delete(int position) {
         if (position >= size || position < 0)
@@ -97,7 +96,7 @@ public class List<T> {
         if (isEmpty())
             return "[ ]";
 
-        StringBuffer result = new StringBuffer("[" + head.value.toString());
+        StringBuilder result = new StringBuilder("[" + head.value.toString());
 
         ListElement temp = head.next;
         for (int i = 1; i < size; i++) {
