@@ -117,7 +117,7 @@ public class Controller {
 
     private void updateState() {
         text.setText("State: " + game.state());
-        if (game.state() != "Playing") {
+        if (game.state() != "PLAYING") {
             setDisableAll(true);
         }
     }

@@ -12,10 +12,10 @@ public class Game {
         field = new Cell[FIELD_SIZE][FIELD_SIZE];
         for (int i = 0; i < FIELD_SIZE; i++)
             for (int j = 0; j < FIELD_SIZE; j++)
-                field[i][j] = Cell.Nothing;
+                field[i][j] = Cell.NOTHING;
 
         turn = Player.X;
-        state = State.Playing;
+        state = State.PLAYING;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Game {
      * @return false if looking position is not empty
      */
     public boolean turn(int row, int column) {
-        if (field[row][column] != Cell.Nothing || state != State.Playing)
+        if (field[row][column] != Cell.NOTHING || state != State.PLAYING)
             return false;
 
         field[row][column] = turn.toCell();
@@ -62,7 +62,7 @@ public class Game {
             }
 
             setState(isXWonHorizontal || isXWonVertical, isOWonHorizontal || isOWonVertical);
-            if (state != State.Playing)
+            if (state != State.PLAYING)
                 return;
         }
         boolean isXWonDiagonal = true;
@@ -74,7 +74,7 @@ public class Game {
         }
 
         setState(isXWonDiagonal, isOWonDiagonal);
-        if (state != State.Playing)
+        if (state != State.PLAYING)
             return;
 
         isXWonDiagonal = true;
@@ -86,15 +86,15 @@ public class Game {
         }
 
         setState(isXWonDiagonal, isOWonDiagonal);
-        if (state != State.Playing)
+        if (state != State.PLAYING)
             return;
 
         for (int i = 0; i < FIELD_SIZE; i++)
             for (int j = 0; j < FIELD_SIZE; j++)
-                if (field[i][j] == Cell.Nothing)
+                if (field[i][j] == Cell.NOTHING)
                     return;
 
-        state = State.Standoff;
+        state = State.STANDOFF;
     }
 
     /**
@@ -104,21 +104,21 @@ public class Game {
      */
     private void setState(boolean isXWonCondition, boolean isOWonCondition) {
         if (isXWonCondition) {
-            state = State.XWon;
+            state = State.X_WON;
             return;
         }
 
         if (isOWonCondition)
-            state = State.OWon;
+            state = State.O_WON;
     }
 
     /** Enum of states of game */
     private enum State {
-        Playing, XWon, OWon, Standoff
+        PLAYING, X_WON, O_WON, STANDOFF
     }
 
     /** Enum of all thing that cell of field can become to */
-    private enum Cell {X, O, Nothing}
+    private enum Cell {X, O, NOTHING}
 
     /** Enum of players */
     private enum Player {

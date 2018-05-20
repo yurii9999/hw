@@ -16,7 +16,7 @@ public class GameTest {
     public void stateTest() {
         Game game = new Game();
         game.turn(0,0);
-        assertEquals("Playing", game.state());
+        assertEquals("PLAYING", game.state());
     }
 
     @Test
@@ -38,6 +38,6 @@ public class GameTest {
         game.turn(1, 2);
         game.turn(2, 2);
 
-        assertEquals("XWon", game.state());
+        assertEquals("X_WON", game.state());
     }
 }
