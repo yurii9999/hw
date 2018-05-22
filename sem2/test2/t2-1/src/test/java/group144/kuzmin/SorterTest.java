@@ -46,7 +46,7 @@ public class SorterTest {
         Integer[] reversed = {1, 2, 5, 7, 8, 8, 9, 14, 17};
         Integer[] sorted = {17, 14, 9, 8, 8, 7, 5, 2, 1};
         Sorter.sort(reversed, Comparator.comparingInt(Integer::intValue).reversed());
-        assertEquals(sorted, reversed);
+        assertArrayEquals(sorted, reversed);
     }
 
     @Test
