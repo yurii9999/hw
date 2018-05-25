@@ -1,4 +1,4 @@
-group 'com.group144.kuzmin'
+group 'group144.kuzmin'
 
 apply plugin: 'java'
 

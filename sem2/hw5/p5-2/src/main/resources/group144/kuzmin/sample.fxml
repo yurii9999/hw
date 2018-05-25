@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.kuzmin.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+   <children>
+      <Label fx:id="resultLabel" text="Label" GridPane.columnIndex="7" />
+      <ChoiceBox fx:id="operatorsBox" onMouseExited="#update" prefWidth="150.0" GridPane.columnIndex="3" />
+      <Spinner fx:id="operandASpinner" onMouseClicked="#update" GridPane.columnIndex="1" />
+      <Spinner fx:id="operandBSpinner" onMouseClicked="#update" GridPane.columnIndex="5" />
+   </children>
+</GridPane>
