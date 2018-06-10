@@ -6,12 +6,30 @@ import static org.junit.Assert.*;
 
 public class CalculatorTest {
     @Test
-    public void calculateTest() {
-        assertEquals("5.0", Calculator.calculate("3+4/2"));
+    public void calculatorTest() {
+        Calculator calculator = new Calculator();
+        calculator.readNextDigit("3");
+        calculator.readNextDigit("2");
+
+        calculator.readOperator("+");
+
+        calculator.readNextDigit("6");
+        calculator.readNextDigit("8");
+
+        final Double result = Double.valueOf(100);
+        assertEquals(String.valueOf(result), calculator.calculate());
     }
 
     @Test
-    public void soManyOnesTest() {
-        assertEquals("1.0", Calculator.calculate("1/1/1/1/1/1/1/1*1*1*1*1/1/1"));
+    public void twoOperatorsTest() {
+        Calculator calculator = new Calculator();
+        calculator.readNextDigit("4");
+        calculator.readOperator("+");
+        calculator.readNextDigit("5");
+        calculator.readOperator("-");
+        calculator.readNextDigit("9");
+
+        final Double result = Double.valueOf(0);
+        assertEquals(String.valueOf(result), calculator.calculate());
     }
 }

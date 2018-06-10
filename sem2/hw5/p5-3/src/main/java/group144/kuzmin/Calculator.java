@@ -1,148 +1,132 @@
 package group144.kuzmin;
 
 public class Calculator {
-    /**
-     * Calculate expression, don't check is expression correct, don't know about brackets
-     *
-     * @param expression correct expression you want to calculate
-     * @return
-     */
-    public static String calculate(String expression) {
-        String[] tokens = split(expression);
+    private Double aOperand;
+    private Double bOperand;
+    private String operator;
+    private StringBuilder enteringOperand;
 
-        for (int i = 0; i < tokens.length; i++) {
-            if (isFirstPriorityOperation(tokens[i])) {
-                tokens[i + 1] = String.valueOf(calculate(tokens[i - 1], tokens[i + 1], tokens[i]));
-                tokens[i - 1] = null;
-                tokens[i] = null;
+    public Calculator() {
+        enteringOperand = new StringBuilder();
+    }
+
+    /**
+     * Method reads token-digit and adds it to operand
+     *
+     * @param token next token
+     * @return operand that it has now
+     */
+    public String readNextDigit(String token) {
+        if (!isDigit(token))
+            return "Not a digit";
+
+        enteringOperand.append(token);
+        return enteringOperand.toString();
+    }
+
+    /**
+     * Method reads token-operator
+     *
+     * @param token token operator
+     * @return next operand that it has now (empty string)
+     */
+    public String readOperator(String token) {
+        if (!isOperator(token))
+            return "Not an operator";
+
+        if (enteringOperand.length() == 0 && aOperand == null)
+            return "Nothing to calculate";
+
+        if (aOperand == null) {
+            aOperand = Double.valueOf(enteringOperand.toString());
+            enteringOperand = new StringBuilder();
+            operator = token;
+            return enteringOperand.toString();
+        }
+
+        if (enteringOperand.length() == 0) {
+            operator = token;
+            return enteringOperand.toString();
+        }
+
+        String result = calculate();
+        operator = token;
+        return result;
+    }
+
+    /**
+     * Method calculate expression a *operand* b = result
+     * @return result
+     */
+    public String calculate() {
+        if (!canCalculate())
+            return enteringOperand.toString();
+
+        if (enteringOperand.length() != 0) {
+            if (aOperand == null) {
+                aOperand = Double.valueOf(enteringOperand.toString());
+                return aOperand.toString();
             }
+
+            bOperand = Double.valueOf(enteringOperand.toString());
+            enteringOperand = new StringBuilder();
         }
-
-        tokens = removeNulls(tokens);
-
-        for (int i = 0; i < tokens.length; i++) {
-            if (isSecondPriorityOperation(tokens[i])) {
-                tokens[i + 1] = String.valueOf(calculate(tokens[i - 1], tokens[i + 1], tokens[i]));
-                tokens[i - 1] = null;
-                tokens[i] = null;
-            }
-        }
-
-        return tokens[tokens.length - 1];
-    }
-
-    /**
-     * Method remove all nulls' tokens from Tokens array
-     *
-     * @param tokens array that you want to clear
-     * @return tokens array without nulls' elements
-     */
-    private static String[] removeNulls(String[] tokens) {
-        int amountNulls = 0;
-        for (int i = 0; i < tokens.length; i++)
-            if (tokens[i] == null)
-                amountNulls++;
-
-        final int newLength = tokens.length - amountNulls;
-        String[] newTokens = new String[newLength];
-
-        int j = 0;
-        for (int i = 0; i < newLength; i++) {
-            while (tokens[j] == null)
-            j++;
-
-            newTokens[i] = tokens[j];
-            j++;
-        }
-
-        return newTokens;
-    }
-
-    /**
-     * Method split expression to tokens
-     *
-     * @param expression correct expression
-     * @return array of tokens of this expression
-     */
-    private static String[] split(String expression) {
-        int amountSigns = 0;
-        for (int i = 0; i < expression.length(); i++)
-            if (isSign(expression.charAt(i)))
-                amountSigns++;
-
-        final int amountTokens = amountSigns * 2 + 1;
-        String[] tokens = new String[amountTokens];
-        int tokensPointer = 0;
-
-        StringBuilder currentToken = new StringBuilder();
-        for (int i = 0; i < expression.length(); i++) {
-            if (isSign(expression.charAt(i))) {
-                tokens[tokensPointer] = currentToken.toString();
-                tokens[tokensPointer + 1] = String.valueOf(expression.charAt(i));
-                tokensPointer += 2;
-
-                currentToken = new StringBuilder();
-            }
-            else
-                currentToken.append(expression.charAt(i));
-        }
-
-        tokens[tokensPointer] = currentToken.toString();
-
-        return tokens;
-    }
-
-    /**
-     * Method check is char is sign
-     *
-     * @param c char you want to check
-     * @return true if it's sign, false otherwise
-     */
-    private static boolean isSign(char c) {
-        return c == '+' || c == '-' || c == '*' || c == '/';
-    }
-
-    /**
-     * Method check is tokens first priority operation(* /)
-     * @param token current token
-     * @return true if it's, false otherwise
-     */
-    private static boolean isFirstPriorityOperation(String token) {
-        return token.equals("*") || token.equals("/");
-    }
-
-    /**
-     * Method check is tokens second priority operation(+ -)
-     * @param token current token
-     * @return true if it's, false otherwise
-     */
-    private static boolean isSecondPriorityOperation(String token) {
-        return token.equals("+") || token.equals("-");
-    }
-
-    /**
-     * Method makes minicalculate, don't check situation st/0
-     *
-     * @param firstOperand a
-     * @param secondOperand b
-     * @param operator sign
-     * @return a 'sign' b
-     */
-    private static String calculate(String firstOperand, String secondOperand, String operator) {
-        final double a = Double.valueOf(firstOperand);
-        final double b = Double.valueOf(secondOperand);
 
         switch (operator) {
             case "+":
-                return String.valueOf(a + b);
+                aOperand = aOperand + bOperand;
+                break;
             case "-":
-                return String.valueOf(a - b);
+                aOperand = aOperand - bOperand;
+                break;
             case "*":
-                return String.valueOf(a * b);
+                aOperand = aOperand * bOperand;
+                break;
             case "/":
-                return String.valueOf(a / b);
+                if (bOperand.equals(0)) {
+                    bOperand = null;
+                    operator = null;
+                    return "Divide by 0 is not allowed";
+                }
+
+                aOperand = aOperand / bOperand;
+                break;
         }
 
-        return String.valueOf(Double.NaN);
+        bOperand = null;
+        operator = null;
+        return aOperand.toString();
+    }
+
+    /**
+     * method clears calculator's memory
+     *
+     * @return new current operator (= empty string)
+     */
+    public String clear() {
+        aOperand = null;
+        bOperand = null;
+        operator = null;
+        enteringOperand = new StringBuilder();
+
+        return enteringOperand.toString();
+    }
+
+    private boolean canCalculate() {
+        boolean result = false;
+        result = result || ((aOperand != null) && (operator != null) && (enteringOperand.length() != 0));
+        result = result || ((aOperand != null) && (operator != null) && (bOperand != null));
+        return result;
+    }
+
+    private static boolean isOperator(String string) {
+        return string.equals("+") || string.equals("-") || string.equals("*") || string.equals("/");
+    }
+
+    private static boolean isDigit(String string) {
+        if (string.length() != 1)
+            return false;
+
+        return string.charAt(0) <= '9' && string.charAt(0) >= '0';
     }
 }

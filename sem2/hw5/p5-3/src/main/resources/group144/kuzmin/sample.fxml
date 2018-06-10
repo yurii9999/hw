@@ -23,7 +23,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="expression" prefHeight="11.0" prefWidth="241.0" text="" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="result" prefHeight="11.0" prefWidth="241.0" text="" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="1">
@@ -40,22 +40,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-             <Button mnemonicParsing="false" onMouseClicked="#clicked_1" text="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_2" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_3" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_plus" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-             <Button mnemonicParsing="false" onMouseClicked="#clicked_4" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_5" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_6" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_minus" text="-" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-             <Button mnemonicParsing="false" onMouseClicked="#clicked_7" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_8" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_9" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_multiply" text="*" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-             <Button mnemonicParsing="false" onMouseClicked="#clicked_0" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_c" text="c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_equals" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clicked_divide" text="/" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+             <Button mnemonicParsing="false" onMouseClicked="#clickedDigit" text="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedSign" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+             <Button mnemonicParsing="false" onMouseClicked="#clickedDigit" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedSign" text="-" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+             <Button mnemonicParsing="false" onMouseClicked="#clickedDigit" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedDigit" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedSign" text="*" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+             <Button mnemonicParsing="false" onMouseClicked="#clickedDigit" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedClear" text="c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedEquals" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+             <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#clickedSign" text="/" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>
