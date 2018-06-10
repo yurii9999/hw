@@ -11,25 +11,33 @@ public class ClassLister {
      * @return string of class's describing
      */
     public static String listing(Class clazz) {
-        StringBuffer result = new StringBuffer();
-        result.append(getModificators(clazz.getModifiers()) +
-                "class " + clazz.getSimpleName() +
-                " {\n");
+        StringBuilder result = new StringBuilder();
+        result.append(getModifiers(clazz.getModifiers()))
+                .append("class ")
+                .append(clazz.getSimpleName())
+                .append(" {\n");
 
         for (Field m : clazz.getDeclaredFields())
-            result.append(getModificators(m.getModifiers()) +
-                    m.getType().getSimpleName() + " " +
-                    m.getName() + ";\n");
+            result.append(getModifiers(m.getModifiers()))
+                    .append(m.getType().getSimpleName())
+                    .append(" ")
+                    .append(m.getName())
+                    .append(";\n");
 
         if (clazz.getDeclaredFields().length > 0)
             result.append('\n');
 
         for (Constructor m : clazz.getDeclaredConstructors()) {
-            result.append(getModificators(m.getModifiers()) +
-                    clazz.getSimpleName() +
-                    "(" + getTypes(m) + ")");
+            result.append(getModifiers(m.getModifiers()))
+                    .append(clazz.getSimpleName())
+                    .append("(")
+                    .append(getTypes(m))
+                    .append(")");
+
             if (m.getExceptionTypes().length > 0)
-                result.append(" throws " + getExceptionsTypes(m) + ";\n");
+                result.append(" throws ")
+                        .append(getExceptionsTypes(m))
+                        .append(";\n");
             else
                 result.append(";\n");
         }
@@ -38,12 +46,18 @@ public class ClassLister {
             result.append('\n');
 
         for (Method m : clazz.getDeclaredMethods()) {
-            result.append(getModificators(m.getModifiers()) +
-                    m.getReturnType().getSimpleName() + " "
-                    + m.getName() +
-                    "(" + getTypes(m) + ")");
+            result.append(getModifiers(m.getModifiers()))
+                    .append(m.getReturnType().getSimpleName())
+                    .append(" ")
+                    .append(m.getName())
+                    .append("(")
+                    .append(getTypes(m))
+                    .append(")");
+
             if (m.getExceptionTypes().length > 0)
-                result.append(" throws " + getExceptionsTypes(m) + ";\n");
+                result.append(" throws ")
+                        .append(getExceptionsTypes(m))
+                        .append(";\n");
             else
                 result.append(";\n");
         }
@@ -64,7 +78,7 @@ public class ClassLister {
      * @param mods member.getModifiers or class.getModifiers
      * @return string with all member's (class) modifiers
      */
-    private static String getModificators(int mods) {
+    private static String getModifiers(int mods) {
         StringBuffer result = new StringBuffer();
 
         if (Modifier.isPublic(mods))
