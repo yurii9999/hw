@@ -55,7 +55,7 @@ public abstract class Controller {
         }
     }
 
-    private void setDisableAll(boolean b) {
+    protected void setDisableAll(boolean b) {
         forAllButtons(button -> button.setDisable(b));
     }
 
