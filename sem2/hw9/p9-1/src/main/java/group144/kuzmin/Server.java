@@ -19,13 +19,18 @@ public class Server implements Adapter {
     }
 
     @Override
-    public boolean turn(int row, int column) {
-        return game.turn(row, column);
-    }
+    public boolean turn(int row, int column) throws IOException {
+        if (game.turn(row, column)) {
+            ByteBuffer byteBuffer = Encoder.encode(row, column, game.state());
+            socketChannel.write(byteBuffer);
+            // Special situation: my turn is right and i game ends, and i dont need opponent's turn; then false means that where will not one more turn from opponent
+            if (!game.state().equals("PLAYING"))
+                return false;
 
-    @Override
-    public String getLastTurnedPlayersName() {
-        return game.getLastTurnedPlayersName();
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -34,18 +39,19 @@ public class Server implements Adapter {
     }
 
     @Override
-    public int[] opponentTurn() {
-        return new int[0];
-    }
+    public int[] opponentTurn() throws IOException {
+        boolean turned = false;
+        int[] coords = {0, 0};
+        while (!turned) {
+            ByteBuffer clientTurn = ByteBuffer.allocate(Encoder.CLIENT_TURN_LENGTH);
+            socketChannel.read(clientTurn);
+            coords = Encoder.decodeClientTurn(clientTurn);
+            turned = game.turn(coords[0], coords[1]);
+            ByteBuffer answer = Encoder.encodeShort(turned, game.state());
+            socketChannel.write(answer);
+        }
 
-
-    public static void main(String[] args) throws IOException {
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.bind(new InetSocketAddress(8888));
-        SocketChannel socketChannel = serverSocketChannel.accept();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(100);
-        socketChannel.read(byteBuffer);
-        byteBuffer.flip();
-        System.out.println("Server's buffer: " + byteBuffer.get(0) + " "  + byteBuffer.get(1) + " " + byteBuffer.get(2) + " " + byteBuffer.get(3));
+        System.out.println(coords);
+        return coords;
     }
 }

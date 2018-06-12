@@ -6,9 +6,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="174.0" prefWidth="249.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.kuzmin.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="174.0" prefWidth="249.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.kuzmin.ControllerServer">
    <children>
-      <Button mnemonicParsing="false" onAction="#clicked_restart" prefHeight="27.0" prefWidth="250.0" text="Restart" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
       <GridPane prefWidth="279.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />

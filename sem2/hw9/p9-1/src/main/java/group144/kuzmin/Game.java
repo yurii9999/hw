@@ -1,6 +1,8 @@
 package group144.kuzmin;
 
 
+import java.nio.ByteBuffer;
+
 /** Class describes game for two players */
 public class Game {
     private static final int FIELD_SIZE = 3;
@@ -19,7 +21,7 @@ public class Game {
     }
 
     /**
-     * Method put a symbol of Player whose turn is on empty position of field
+     * Method put a symbol of Player whose clientTurn is on empty position of field
      *
      * @param row first coordinate of pos
      * @param column second coordinate of pos
@@ -36,14 +38,14 @@ public class Game {
         return true;
     }
 
-    /** @return Symbol of player that did last turn, as a String */
+    /** @return Symbol of player that did last clientTurn, as a String */
     public String getLastTurnedPlayersName() {return turn.opposite().toString();}
 
     /** @return Enum state that show what is going on in game */
     public String state() {return state.toString();}
 
     /**
-     * Method check state and update of the game, it usually run after turn
+     * Method check state and update of the game, it usually run after clientTurn
      * Checks is one of players already won, or are all positions full and no one won
      */
     private void updateState() {
@@ -125,5 +127,5 @@ public class Game {
         X, O;
         public Cell toCell() {return this == Player.X ? Cell.X : Cell.O;}
         public Player opposite() {return this == Player.X ? Player.O : Player.X;}
-        }
     }
+}

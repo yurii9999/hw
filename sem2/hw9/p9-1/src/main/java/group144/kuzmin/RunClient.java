@@ -10,12 +10,12 @@ import javafx.stage.Stage;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-public class Main extends Application {
+public class RunClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("O X O X O X");
+        Parent root = FXMLLoader.load(getClass().getResource("Client.fxml"));
+        primaryStage.setTitle("Client turns O");
         primaryStage.setScene(new Scene(root, 150, 200));
         primaryStage.show();
         primaryStage.setMinWidth(100);
@@ -26,11 +26,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-//        launch(args);
-        Integer a = 1000;
-//        System.out.println(Integer.valueOf(a.byteValue()));
-        IntBuffer intBuffer = IntBuffer.allocate(100);
-        ByteBuffer byteBuffer = ByteBuffer.allocate(100);
-
+        launch(args);
     }
 }

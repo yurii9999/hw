@@ -4,32 +4,34 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class Controller {
+public abstract class Controller {
     @FXML
     Label text;
+    String me;
+    String opponent;
 
-    Game game = new Game();
-    public void clicked(ActionEvent actionEvent) {
+    Adapter game;
+    public void clicked(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
         int[] coords = getLocation(button);
         if (game.turn(coords[0], coords[1])) {
-            button.setText(game.getLastTurnedPlayersName());
-            updateState();
+            button.setText(me);
+            int[] location = game.opponentTurn();
+            Button opponentTurn = getButtonByLocation(location[0], location[1]);
+            opponentTurn.setText(opponent);
         }
-    }
 
-    public void clicked_restart(ActionEvent actionEvent) {
-        game = new Game();
+        if (game.state() != "PLAYING")
+            button.setText(me);
 
-        setDisableAll(false);
-        forAllButtons(button -> button.setText("  "));
-
-        text.setText("");
+        updateState();
     }
 
     private int[] getLocation(Button button) {
@@ -90,5 +92,30 @@ public class Controller {
         consumer.accept(button_2_0);
         consumer.accept(button_2_1);
         consumer.accept(button_2_2);
+    }
+
+    protected Button getButtonByLocation(int row, int collum) {
+        switch (row) {
+            case 0:
+                switch (collum) {
+                    case 0: return button_0_0;
+                    case 1: return button_0_1;
+                    case 2: return button_0_2;
+                }
+            case 1:
+                switch (collum) {
+                    case 0: return button_1_0;
+                    case 1: return button_1_1;
+                    case 2: return button_1_2;
+                }
+            case 2:
+                switch (collum) {
+                    case 0: return button_2_0;
+                    case 1: return button_2_1;
+                    case 2: return button_2_2;
+                }
+
+            default: return null;
+        }
     }
 }
