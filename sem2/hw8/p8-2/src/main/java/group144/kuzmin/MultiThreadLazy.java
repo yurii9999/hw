@@ -12,11 +12,14 @@ public class MultiThreadLazy<T> implements Lazy<T> {
     }
 
     @Override
-    public synchronized T get() {
+    public T get() {
+        if (supplier == null)
+            return result;
+
+        synchronized (this) {
             if (supplier == null)
                 return result;
 
-        synchronized (this) {
             result = supplier.get();
             supplier = null;
             return result;
