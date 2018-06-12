@@ -34,7 +34,7 @@ public class Client implements Adapter {
     }
 
     @Override
-    public int[] opponentTurn() throws IOException {
+    public synchronized int[] opponentTurn() throws IOException {
         ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.SERVER_TURN_LENGTH);
         System.out.println("Client: reading");
         socketChannel.read(serverTurn);

@@ -39,7 +39,7 @@ public class Server implements Adapter {
     }
 
     @Override
-    public int[] opponentTurn() throws IOException {
+    public synchronized int[] opponentTurn() throws IOException {
         boolean turned = false;
         int[] coords = {0, 0};
         while (!turned) {

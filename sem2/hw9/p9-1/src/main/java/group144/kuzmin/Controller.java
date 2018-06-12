@@ -1,5 +1,6 @@
 package group144.kuzmin;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.concurrent.ForkJoinWorkerThread;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -23,12 +25,31 @@ public abstract class Controller {
         int[] coords = getLocation(button);
         if (game.turn(coords[0], coords[1])) {
             button.setText(me);
-            int[] location = game.opponentTurn();
-            Button opponentTurn = getButtonByLocation(location[0], location[1]);
-            opponentTurn.setText(opponent);
+            setDisableAll(true);
+            Runnable runnable = () -> {
+                int[] location;
+                try {
+                    location = game.opponentTurn();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            Button opponentTurn = getButtonByLocation(location[0], location[1]);
+                            opponentTurn.setText(opponent);
+                            updateState();
+                        }
+                    });
+                } catch (IOException e) {
+                    System.out.println("St wrong");
+                }
+
+                setDisableAll(false);
+            };
+
+            Thread thread = new Thread(runnable);
+            thread.start();
         }
 
-        if (game.state() != "PLAYING")
+        if (game.state().equals("PLAYING"))
             button.setText(me);
 
         updateState();
@@ -53,6 +74,10 @@ public abstract class Controller {
         if (game.state() != "PLAYING") {
             setDisableAll(true);
         }
+    }
+
+    public void s(Button button) {
+        button.setText("daddsdasadsdsa");
     }
 
     protected void setDisableAll(boolean b) {
