@@ -1,6 +1,8 @@
 package group144.kuzmin;
 
 import java.util.Comparator;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
 
 public class MultithreadSorter {
     /**
@@ -11,11 +13,27 @@ public class MultithreadSorter {
      * @param <T> type of array's elements
      */
     public static <T> void sort(T[] array, Comparator<T> comparator) {
-        sortPart(array, comparator, 0, array.length - 1);
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        forkJoinPool.invoke(new sortPart(array, comparator, 0, array.length - 1));
+        forkJoinPool.shutdown();
     }
 
-    private static <T> void sortPart(T[] array, Comparator<T> comparator, int from, int to) {
-        if (to - from < 1)
+    private static class sortPart <T> extends RecursiveAction {
+        private int from;
+        private int to;
+        private T[] array;
+        private Comparator<T> comparator;
+
+        public sortPart(T[] array, Comparator<T> comparator, int from, int to) {
+            this.from = from;
+            this.to = to;
+            this.array = array;
+            this.comparator = comparator;
+        }
+
+        @Override
+        protected void compute() {
+            if (to - from < 1)
             return;
 
         T pivot = array[from];
@@ -36,21 +54,53 @@ public class MultithreadSorter {
             }
         }
 
-        final int mark = i;
-
-        Runnable firstPartSort = () -> sortPart(array, comparator, from, mark - 1);
-
-        Thread firstPartThread = new Thread(firstPartSort);
-
-        firstPartThread.start();
-        sortPart(array, comparator, mark, to);
-
-        try {
-            firstPartThread.join();
-        } catch (InterruptedException e) {
-            return;
+//        invokeAll(new sortPart(array, comparator, from, i - 1),
+//                    new sortPart(array, comparator, i, to));
+        sortPart left = new sortPart(array, comparator, from, i - 1);
+        sortPart right = new sortPart(array, comparator, i + 1, to);
+//
+        left.fork();
+        right.compute();
+        left.join();
         }
     }
+//    private static <T> void sortPart(T[] array, Comparator<T> comparator, int from, int to) {
+//        if (to - from < 1)
+//            return;
+//
+//        T pivot = array[from];
+//        int i = from;
+//        int j = to;
+//
+//        while (i <= j) {
+//            while (comparator.compare(array[i], pivot) < 0)
+//                i++;
+//
+//            while (comparator.compare(array[j], pivot) > 0)
+//                j--;
+//
+//            if (i <= j) {
+//                swap(array, i, j);
+//                i++;
+//                j--;
+//            }
+//        }
+//
+//        final int mark = i;
+//
+//        Runnable firstPartSort = () -> sortPart(array, comparator, from, mark - 1);
+//
+//        Thread firstPartThread = new Thread(firstPartSort);
+//
+//        firstPartThread.start();
+//        sortPart(array, comparator, mark, to);
+//
+//        try {
+//            firstPartThread.join();
+//        } catch (InterruptedException e) {
+//            return;
+//        }
+//    }
 
     private static <T> void swap(T[] array, int i, int j) {
         T temp = array[i];

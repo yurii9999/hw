@@ -6,7 +6,7 @@ import java.util.stream.*;
 
 public class Main {
     public static void main(String[] args) {
-        final int SIZE = 100000;
+        final int SIZE = 1000000;
         final int MAX = 20000;
         Random random = new Random();
 
