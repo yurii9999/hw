@@ -3,8 +3,8 @@ package group144.kuzmin;
 import java.util.function.Supplier;
 
 public class MultiThreadLazy<T> implements Lazy<T> {
-    private Supplier<T> supplier;
-    private T result;
+    private volatile Supplier<T> supplier;
+    private volatile T result;
 
     public MultiThreadLazy(Supplier<T> supplier) {
         this.supplier = supplier;
