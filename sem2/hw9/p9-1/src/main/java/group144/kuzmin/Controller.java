@@ -26,30 +26,28 @@ public abstract class Controller {
         if (game.turn(coords[0], coords[1])) {
             button.setText(me);
             setDisableAll(true);
-            Runnable runnable = () -> {
-                int[] location;
+
+            Runnable waitOpponent = () -> {
                 try {
+                    int[] location;
                     location = game.opponentTurn();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            Button opponentTurn = getButtonByLocation(location[0], location[1]);
+                    Button opponentTurn = getButtonByLocation(location[0], location[1]);
+                    Platform.runLater(() -> {
                             opponentTurn.setText(opponent);
+                            setDisableAll(false);
                             updateState();
-                        }
                     });
                 } catch (IOException e) {
-                    System.out.println("St wrong");
+                    System.out.println("Lost connection");
+                    return;
                 }
-
-                setDisableAll(false);
             };
 
-            Thread thread = new Thread(runnable);
+            Thread thread = new Thread(waitOpponent);
             thread.start();
         }
 
-        if (game.state().equals("PLAYING"))
+        if (!game.state().equals("PLAYING"))
             button.setText(me);
 
         updateState();
@@ -69,15 +67,11 @@ public abstract class Controller {
         return coords;
     }
 
-    private void updateState() {
+    protected void updateState() {
         text.setText("State: " + game.state());
         if (game.state() != "PLAYING") {
             setDisableAll(true);
         }
-    }
-
-    public void s(Button button) {
-        button.setText("daddsdasadsdsa");
     }
 
     protected void setDisableAll(boolean b) {

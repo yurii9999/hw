@@ -9,8 +9,8 @@ public interface Adapter {
      *
      * @param row first coordinate of pos
      * @param column second coordinate of pos
-     * @return true if my turn was puted and i need wait for opponent's turn
-     * @return false if my turn was puted and game has end, or cell that you want to use is already full
+     * @return true if my turn was puted and i need wait for opponent's turn and
+     * false if my turn was puted and game has end, or cell that you want to use is already full
      * @throws IOException throws when it's something wrong with SocketServerChannel - SocketChannel connection
      */
     boolean turn(int row, int column) throws IOException;

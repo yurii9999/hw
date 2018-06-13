@@ -7,8 +7,8 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 public class Server implements Adapter {
-    ServerSocketChannel serverSocketChannel;
-    SocketChannel socketChannel;
+    private ServerSocketChannel serverSocketChannel;
+    private SocketChannel socketChannel;
     private Game game;
 
     public Server(int port) throws IOException {
@@ -23,11 +23,7 @@ public class Server implements Adapter {
         if (game.turn(row, column)) {
             ByteBuffer byteBuffer = Encoder.encode(row, column, game.state());
             socketChannel.write(byteBuffer);
-            // Special situation: my turn is right and i game ends, and i dont need opponent's turn; then false means that where will not one more turn from opponent
-            if (!game.state().equals("PLAYING"))
-                return false;
-
-            return true;
+            return game.state().equals("PLAYING");
         }
 
         return false;
@@ -39,7 +35,7 @@ public class Server implements Adapter {
     }
 
     @Override
-    public synchronized int[] opponentTurn() throws IOException {
+    public int[] opponentTurn() throws IOException {
         boolean turned = false;
         int[] coords = {0, 0};
         while (!turned) {
@@ -51,7 +47,6 @@ public class Server implements Adapter {
             socketChannel.write(answer);
         }
 
-        System.out.println(coords);
         return coords;
     }
 }

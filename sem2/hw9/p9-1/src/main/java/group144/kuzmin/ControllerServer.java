@@ -10,16 +10,22 @@ import java.util.ResourceBundle;
 public class ControllerServer extends Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setDisableAll(true);
         System.out.println("Server is on, waiting client");
-        try {
-            game = new Server(8888);
-        } catch (IOException e) {
-            System.out.println("Incorrect port");
-        }
+        Runnable waitConnection = () -> {
+            try {
+                game = new Server(8888);
+                setDisableAll(false);
+                System.out.println("Connected, game is on");
+            } catch (IOException e) {
+                System.out.println("Incorrect port");
+                return;
+            }
+        };
 
-        setDisableAll(false);
-        System.out.println("Connected, game is on");
+        Thread wait = new Thread(waitConnection);
+        setDisableAll(true);
+        wait.start();
+
         me = "X";
         opponent = "O";
     }

@@ -49,11 +49,7 @@ public class Encoder {
      * @return info about last turn
      */
     public static boolean decodeShort(ByteBuffer byteBuffer) {
-        byte result = byteBuffer.get(0);
-        if (result == 1)
-            return true;
-
-        return false;
+        return byteBuffer.get(0) == 1;
     }
 
     /**
@@ -101,8 +97,7 @@ public class Encoder {
      * @return int array{row, column}
      */
     public static int[] decodeClientTurn(ByteBuffer byteBuffer) {
-        int[] result = {byteBuffer.get(0), byteBuffer.get(1)};
-        return result;
+        return new int[]{byteBuffer.get(0), byteBuffer.get(1)};
     }
 
     /**
@@ -165,8 +160,7 @@ public class Encoder {
      * @return int array{row, column}
      */
     public static int[] getServerTurn(ByteBuffer byteBuffer) {
-        int[] result = {byteBuffer.get(0), byteBuffer.get(1)};
-        return result;
+        return new int[]{byteBuffer.get(0), byteBuffer.get(1)};
     }
 
 

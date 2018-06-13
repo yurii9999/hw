@@ -6,8 +6,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class Client implements Adapter {
-    SocketChannel socketChannel;
-    String state;
+    private SocketChannel socketChannel;
+    private String state;
 
     public Client(int port) throws IOException {
         socketChannel = SocketChannel.open();
@@ -22,7 +22,7 @@ public class Client implements Adapter {
         socketChannel.read(answer);
         state = Encoder.getStateShort(answer);
         // Special situation: my turn is right and i game ends, and i dont need opponent's turn; then false means that where will not one more turn from opponent
-        if (!state.equals("PLAYING") && Encoder.decodeShort(answer) == true)
+        if (!state.equals("PLAYING"))
             return false;
 
         return Encoder.decodeShort(answer);
@@ -34,9 +34,8 @@ public class Client implements Adapter {
     }
 
     @Override
-    public synchronized int[] opponentTurn() throws IOException {
+    public int[] opponentTurn() throws IOException {
         ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.SERVER_TURN_LENGTH);
-        System.out.println("Client: reading");
         socketChannel.read(serverTurn);
         state = Encoder.getState(serverTurn);
         return Encoder.getServerTurn(serverTurn);

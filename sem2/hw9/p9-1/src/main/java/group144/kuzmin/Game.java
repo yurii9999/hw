@@ -25,8 +25,7 @@ public class Game {
      *
      * @param row first coordinate of pos
      * @param column second coordinate of pos
-     * @return true if symbol put
-     * @return false if looking position is not empty
+     * @return true if symbol put and false if looking position is not empty
      */
     public boolean turn(int row, int column) {
         if (field[row][column] != Cell.NOTHING || state != State.PLAYING)
