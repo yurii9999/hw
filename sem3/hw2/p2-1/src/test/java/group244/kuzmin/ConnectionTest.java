@@ -47,7 +47,7 @@ public class ConnectionTest {
         assertFalse(c1.isInfected());
         assertFalse(c2.isInfected());
     }
-    
+
     @Test
     public void infectFalseTest() {
         Computer c1 = new Computer(1, "Windows");
