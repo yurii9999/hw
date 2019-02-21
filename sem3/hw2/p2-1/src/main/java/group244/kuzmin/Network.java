@@ -14,12 +14,22 @@ public class Network {
         connections.add(connection);
     }
 
-    /**
-     * update all connection in the net
-     */
     public void update() {
+        List<Computer> infectedInThisTime = new LinkedList<>();
+
         for (Connection connection : connections) {
-            connection.interact();
+            Computer c1 = connection.computer1();
+            Computer c2 = connection.computer2();
+            if (!infectedInThisTime.contains(c1) && !infectedInThisTime.contains(c2)) {
+                boolean before1 = c1.isInfected();
+                boolean before2 = c2.isInfected();
+                connection.interact();
+                boolean after1 = c1.isInfected();
+                boolean after2 = c2.isInfected();
+
+                if (!before1 && after1) { infectedInThisTime.add(c1);}
+                if (!before2 && after2) { infectedInThisTime.add(c2);}
+            }
         }
     }
 
@@ -34,10 +44,6 @@ public class Network {
         return stringBuffer.toString();
     }
 
-    /**
-     * check are all computers in the net is infected
-     * @return true if all are
-     */
     public boolean isInfectedNetwork() {
         for (Connection connection : connections) {
             if (!connection.isInfected()) {

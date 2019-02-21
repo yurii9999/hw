@@ -37,10 +37,6 @@ public class Connection {
         return computer2;
     }
 
-    /**
-     * Check is both computers in the connection infected
-     * @return true if both of computers is infected
-     */
     public boolean isInfected() {
         return computer1.isInfected() && computer2.isInfected();
     }

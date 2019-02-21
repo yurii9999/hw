@@ -3,12 +3,12 @@ package group244.kuzmin;
 public class Main {
     public static void main(String[] args) {
         // пытаемся исполнить такое: https://imgur.com/a/FANo2lm
-        Computer computer1 = new Computer(1, "Windows");
-        Computer computer2 = new Computer(2, "Windows");
-        Computer computer3 = new Computer(3, "Windows");
-        Computer computer4 = new Computer(4, "Linux");
-        Computer computer5 = new Computer(5, "Linux");
-        Computer computer6 = new Computer(6, "Windows");
+        Computer computer1 = new WindowsComputer();
+        Computer computer2 = new WindowsComputer();
+        Computer computer3 = new WindowsComputer();
+        Computer computer4 = new LinuxComputer();
+        Computer computer5 = new LinuxComputer();
+        Computer computer6 = new WindowsComputer();
 
         computer3.forceInfect();
 
