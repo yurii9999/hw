@@ -8,9 +8,14 @@ public abstract class Computer {
     private int number;
     private String os;
     private Network network;
+    private Infector infector;
 
     public boolean isInfected() {
         return isInfected;
+    }
+
+    public void setInfector(Infector infector) {
+        this.infector = infector;
     }
 
     public abstract Double getProbability();
@@ -20,8 +25,7 @@ public abstract class Computer {
     }
 
     public boolean infect() {
-        Random random = new Random();
-        if (random.nextDouble() < getProbability()) {
+        if (infector.getProbability() < getProbability()) {
             isInfected = true;
         }
         return isInfected;
