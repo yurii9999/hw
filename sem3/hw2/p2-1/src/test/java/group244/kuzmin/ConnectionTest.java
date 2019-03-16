@@ -35,6 +35,7 @@ public class ConnectionTest {
         Connection co3 = new Connection(c2, c4);
         Connection co4 = new Connection(c4, c5);
 
+
         Network network = new Network();
         network.addConnection(co1);
         network.addConnection(co2);
@@ -42,12 +43,30 @@ public class ConnectionTest {
         network.addConnection(co4);
 
         assertTrue(c1.isInfected());
+        assertFalse(c2.isInfected());
+        assertFalse(c3.isInfected());
+        assertFalse(c4.isInfected());
+        assertFalse(c5.isInfected());
+
         network.update();
+        assertTrue(c1.isInfected());
         assertTrue(c2.isInfected());
         assertFalse(c3.isInfected());
+        assertFalse(c4.isInfected());
+        assertFalse(c5.isInfected());
+
         network.update();
+        assertTrue(c1.isInfected());
+        assertTrue(c2.isInfected());
+        assertFalse(c3.isInfected());
         assertTrue(c4.isInfected());
+        assertFalse(c5.isInfected());
+        
         network.update();
+        assertTrue(c1.isInfected());
+        assertTrue(c2.isInfected());
+        assertFalse(c3.isInfected());
+        assertTrue(c4.isInfected());
         assertFalse(c5.isInfected());
     }
 }
