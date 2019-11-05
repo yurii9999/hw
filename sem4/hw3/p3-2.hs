@@ -1,0 +1,1 @@
+oneSevenNineList = 1:7:9:  ((foldr (++) []).map(zipWith (+) [1, 7, 9]).map(map (*10)).map(\a -> [a, a, a])) oneSevenNineList
